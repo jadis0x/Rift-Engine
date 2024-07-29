@@ -3,6 +3,7 @@
 #include "RiftWin.h"
 #include "RiftException.h"
 #include "Keyboard.h"
+#include "Mouse.h"
 
 class Window
 {
@@ -40,12 +41,14 @@ public:
     ~Window(); // Yıkıcı
     Window(const Window&) = delete; // Kopyalama yapıcısını sil
     Window& operator=(const Window&) = delete; // Kopyalama atama operatörünü sil
+    void SetTitle(const std::string& title);
 private:
     static LRESULT CALLBACK HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept; // Kurulum mesaj işleyici
     static LRESULT CALLBACK HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept; // Mesaj yönlendirme işleyici
     LRESULT HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept; // Mesaj işleme işlevi
 public:
     Keyboard kbd; // Klavye girişi işleyici
+    Mouse mouse;
 private:
     int width; // Pencere genişliği
     int height; // Pencere yüksekliği
