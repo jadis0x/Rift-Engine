@@ -40,3 +40,6 @@ RiftEngine/x64/Debug/WindowsMessageMap.obj
 RiftEngine/x64/Debug/WinMain.obj
 x64/Debug/RiftEngine.exe
 x64/Debug/RiftEngine.pdb
+*.vsidx
+*.ipch
+*.obj
