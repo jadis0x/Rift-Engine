@@ -4,7 +4,10 @@
 #include "RiftException.h"
 #include "Keyboard.h"
 #include "Mouse.h"
+#include "Graphics.h"
+
 #include <optional>
+#include <memory>
 
 class Window
 {
@@ -44,6 +47,7 @@ public:
     Window& operator=(const Window&) = delete; // Kopyalama atama operatörünü sil
     void SetTitle(const std::string& title);
     static std::optional<int> ProcessMessages();
+    Graphics& Gfx();
 private:
     static LRESULT CALLBACK HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept; // Kurulum mesaj işleyici
     static LRESULT CALLBACK HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept; // Mesaj yönlendirme işleyici
@@ -55,6 +59,7 @@ private:
     int width; // Pencere genişliği
     int height; // Pencere yüksekliği
     HWND hWnd; // Pencere işaretçisi
+    std::unique_ptr<Graphics> pGfx;
 };
 
 // HRESULT hata kodları ile pencere istisnaları oluşturmak için makro

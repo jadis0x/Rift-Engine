@@ -92,6 +92,9 @@ Window::Window(int width, int height, const char* name)
 	else {
 		// newly created windows start off as hidden
 		ShowWindow(hWnd, SW_MAXIMIZE);
+
+		// create graphics object
+		pGfx = std::make_unique<Graphics>(hWnd);
 	}
 }
 
@@ -122,6 +125,11 @@ std::optional<int> Window::ProcessMessages()
 
 	// return empty optional when not quitting app
 	return {};
+}
+
+Graphics& Window::Gfx()
+{
+	return *pGfx;
 }
 
 LRESULT Window::HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
@@ -200,7 +208,6 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 				mouse.OnMouseLeave();
 			}
 		}
-
 		
 		break;
 	}
